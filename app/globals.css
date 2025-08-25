@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f0f0f0;
   --foreground: #171717;
 }
 
@@ -13,4 +13,34 @@ body {
 
 nav {
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  /* background: rgba(188, 113, 234, 0.3); */
+  background: rgba(240, 240, 240, 0.3);
+  border: 2px dotted #ccc;
+}
+
+.glass {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background: rgba(157, 0, 255, 0.3);
+  transition: all 1s;
+}
+
+input {
+  outline: 0;
+  border: 0;
+}
+
+.btnClick {
+  animation: btnAnimation 0.5s ease-in-out;
+}
+
+@keyframes btnAnimation {
+  0% {
+    opacity: 0%;
+    transform: scale(0.99)
+  } 100%  {
+    opacity: 100%;
+    transform: scale(1)
+  }
 }

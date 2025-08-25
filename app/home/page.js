@@ -15,7 +15,7 @@ const Home = () => {
   }, [router])
 
   return (
-    <div>Home</div>
+    <div>Sweet Home</div>
   )
 }
 
