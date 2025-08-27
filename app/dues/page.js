@@ -12,7 +12,7 @@ const Dues = () => {
       const userData = JSON.parse(localStorage.getItem('userData'));
   
       try {
-          const res = await axios.get(`${process.env.API_URL}/getAllDues`)
+          const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/getAllDues`)
   
           console.log(res.data.accounts)
   

@@ -26,7 +26,7 @@ const Create = () => {
             deliveryCharge
         })
     try {
-        const res = await axios.post(`${process.env.API_URL}/create`, {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/create`, {
             sellerName: userData.username,
             buyerName, 
             buyerNumber, 
