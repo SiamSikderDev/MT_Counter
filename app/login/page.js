@@ -56,7 +56,7 @@ const Login = () => {
         <Input onChange={(e) => setPassword(e.target.value)} type='password' placeholder="Password..." />
         <Button onClick={login} text='Login' />
         <div className='flex gap-2 ml-8'>
-          <p>Don't have an account?</p>
+          <p>Don&apos;t have an account?</p>
           <p onClick={() => router.push('/signup')} className='text-[#9d00ff] text-bold cursor-pointer'>Signup</p>
         </div>
       </div>
