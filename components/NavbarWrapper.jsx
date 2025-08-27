@@ -1,9 +1,10 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { IoStorefront, IoReader, IoHandRight, IoMoon, IoSunny, IoAdd } from "react-icons/io5";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const router = useRouter();
   const glassRef = useRef(null);
   const [glassLeft, setGlassLeft] = useState(0);
@@ -26,6 +27,8 @@ export default function Navbar() {
     { icon: <IoHandRight size={30} color="#9d00ff" />, label: "Dues" },
     { icon: <IoAdd size={30} color="#9d00ff" />, label: "Create" },
   ];
+
+  if (pathname.includes('login') || pathname.includes('signup')) return;
 
   return (
     <main className="w-full h-26 fixed top-0 flex justify-center items-center gap-2">
