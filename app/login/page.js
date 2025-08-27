@@ -19,7 +19,7 @@ const Login = () => {
       password
     })
     try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+      const res = await axios.post(`https://mt-counter-server.onrender.com/login`, {
         usernameOrEmail, 
         password
       })
