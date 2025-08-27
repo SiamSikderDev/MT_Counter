@@ -19,7 +19,7 @@ const Login = () => {
       password
     })
     try {
-      const res = await axios.post('http://localhost:5000/login', {
+      const res = await axios.post(`${process.env.API_URL}/login`, {
         usernameOrEmail, 
         password
       })
