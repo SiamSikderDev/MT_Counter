@@ -1,61 +1,43 @@
 "use client";
+import { darkThemeColors } from '@/utils/Color';
+import { ThemeContext } from './ThemeContext'
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect } from "react";
 import { IoStorefront, IoReader, IoHandRight, IoMoon, IoSunny, IoAdd } from "react-icons/io5";
 
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const glassRef = useRef(null);
-  const [glassLeft, setGlassLeft] = useState(0);
-  const [darkTheme, setDarkTheme] = useState(false);
+  const { darkTheme, toggleTheme } = useContext(ThemeContext);
 
-  // Refresh করলে localStorage থেকে আগের position লোড হবে
   useEffect(() => {
-    const saved = localStorage.getItem("glassPosition");
-    if (saved) {
-      setGlassLeft(parseInt(saved));
-      if (glassRef.current) {
-        glassRef.current.style.left = saved + "px";
-      }
+    if (darkTheme){
+      document.body.style.background = '#161622';
+    } else {
+      document.body.style.background = '#f0f0f0';
     }
-  }, []);
+  }, [darkTheme])
 
   const navItems = [
-    { icon: <IoStorefront size={30} color="#9d00ff" />, label: "Home" },
-    { icon: <IoReader size={30} color="#9d00ff" />, label: "Sells" },
-    { icon: <IoHandRight size={30} color="#9d00ff" />, label: "Dues" },
-    { icon: <IoAdd size={30} color="#9d00ff" />, label: "Create" },
+    { icon: <IoStorefront size={24} color={pathname.includes('home') ? '#8C00FF' : '#5D3A9B'} />, label: "Home" },
+    { icon: <IoReader size={24} color={pathname.includes('sells') ? '#8C00FF' : '#5D3A9B'} />, label: "Sells" },
+    { icon: <IoHandRight size={24} color={pathname.includes('dues') ? '#8C00FF' : '#5D3A9B'} />, label: "Dues" },
+    { icon: <IoAdd size={24} color={pathname.includes('create') ? '#8C00FF' : '#5D3A9B'} />, label: "Create" },
   ];
 
   if (pathname.includes('login') || pathname.includes('signup')) return;
 
   return (
-    <main className="w-full h-26 fixed top-0 flex justify-center items-center gap-2">
-      <nav className="rounded-full p-2 flex justify-between items-center relative">
-        
-        {/* Glass */}
-        <div
-          ref={glassRef}
-          className="glass h-[98%] w-[85px] rounded-full absolute z-8 border-2 border-dotted border-[#9d00ff] transition-all duration-300"
-          style={{ left: glassLeft }}
-        ></div>
-
+    <main className="w-full h-22 fixed top-0 flex justify-center items-center gap-2">
+      <nav style={{
+        background: darkTheme ? 'rgba(61, 61, 61, 0.3)' : 'rgba(240, 240, 240, 0.3)',
+        border: darkTheme ? '2px dotted #5D3A9B' : '2px dotted #5D3A9B'
+      }} className="rounded-full p-2 flex justify-between items-center relative">
         {/* Nav Items */}
         {navItems.map((item, index) => (
           <div
             key={index}
             onClick={(e) => {
-              const btn = e.currentTarget;
-              const newLeft = btn.offsetLeft - 10;
-
-              setGlassLeft(newLeft);
-              localStorage.setItem("glassPosition", newLeft);
-
-              if (glassRef.current) {
-                glassRef.current.style.left = newLeft + "px";
-              }
-
               if (index == 0) router.push('/home');
               if (index == 1) router.push('/sells'); 
               if (index == 2) router.push('/dues'); 
@@ -65,15 +47,15 @@ export default function Navbar() {
             className="flex flex-col justify-center items-center z-10 cursor-pointer px-4"
           >
             {item.icon}
-            <p className="text-[#9d00ff]">{item.label}</p>
+            <p style={{
+                color: pathname.includes(item.label.toLowerCase()) ? '#8C00FF' : '#5D3A9B'
+            }}>{item.label}</p>
           </div>
         ))}
       </nav>
-
-        <nav className="rounded-full p-2 flex justify-between items-center flex-col">
-            { darkTheme ? <IoSunny size={30} color="#9d00ff" /> : <IoMoon size={30} color="#9d00ff" /> }
-            <p className="text-[#9d00ff]">Theme</p>
-        </nav>
+        { darkTheme ? 
+        <IoSunny onClick={toggleTheme} className='cursor-pointer' size={30} color="#8C00FF" /> 
+        : <IoMoon onClick={toggleTheme} className='cursor-pointer' size={30} color="#8C00FF" /> }
     </main>
   );
 }
