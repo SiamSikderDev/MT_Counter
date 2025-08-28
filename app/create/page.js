@@ -50,12 +50,12 @@ const Create = () => {
     }
 
   return (
-    <main className='lg:flex'>
+    <main className='flex justify-center items-center'>
         <Image alt='Create Image' src={CreateImage} style={{
-            width: '100%',
-            height: '80%'
+            width: '60%',
+            height: '60%'
         }} />
-        <div className='w-[99%] h-[380px] bg-[#f0f0f0] m-2 rounded-lg p-2'>
+        <div className='w-[99%] h-[380px] rounded-lg'>
             <Input onChange={e => setProductPrice(e.target.value)} type="product" placeholder="Product price..." />
             <Input onChange={e => setDeliveryCharge(e.target.value)} type="price" placeholder="Delivery charge..." />
             <Input onChange={e => setBuyerName(e.target.value)} type="username" placeholder="Buyer name..." />
