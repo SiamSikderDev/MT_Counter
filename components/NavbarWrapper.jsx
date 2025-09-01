@@ -29,10 +29,7 @@ export default function Navbar() {
 
   return (
     <main className="w-full h-22 fixed top-0 flex justify-center items-center gap-2">
-      <nav style={{
-        background: darkTheme ? 'rgba(61, 61, 61, 0.3)' : 'rgba(240, 240, 240, 0.3)',
-        border: darkTheme ? '2px dotted #5D3A9B' : '2px dotted #5D3A9B'
-      }} className="rounded-full p-2 flex justify-between items-center relative">
+      <nav className="rounded-full p-2 flex justify-between items-center relative backdrop-blur-sm">
         {/* Nav Items */}
         {navItems.map((item, index) => (
           <div

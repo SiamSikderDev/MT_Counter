@@ -6,12 +6,15 @@ import { ThemeContext } from '@/components/ThemeContext'
 import AccountImage from '@/public/assets/account.png';
 import Image from 'next/image';
 import { darkThemeColors, lightThemeColors } from '@/utils/Color'
+import Loading from '@/components/Loading';
 
 const Dues = () => {
   const [accounts, setAccounts] = useState([]);
   const { darkTheme, toggleTheme } = useContext(ThemeContext);
+  const [loading, setLoading] = useState(false);
 
   const getAllAccounts = async () => {  
+      setLoading(true);
       try {
           const res = await axios.get(`https://mt-counter-server.onrender.com/getAllDues`)
   
@@ -22,7 +25,7 @@ const Dues = () => {
       } catch (e) {
           console.error(e.message)
       } finally {
-              
+          setLoading(false);
           }
       }
 
@@ -30,17 +33,18 @@ const Dues = () => {
         getAllAccounts();
       }, [])
 
+      if (loading) return <Loading />
+
   return (
     <main className='flex-1'>
       {
         accounts ? (
-          <div className='w-full h-full flex flex-col-reverse lg:flex-row flex-wrap'>
+          <div className='w-full h-full flex flex-col-reverse lg:flex-row flex-wrap justify-center'>
             {
               accounts?.map((account) => (
                 <div style={{
                   background: darkTheme ? darkThemeColors.background : lightThemeColors.background,
-                  border: darkTheme ? `2px dotted ${darkThemeColors.border}` : `2px dotted ${lightThemeColors.border}`
-                }} key={account._id} className='w-[95%] lg:w-[350px] p-2 rounded-md m-2 flex flex-col'>
+                }} key={account._id} className='w-[95%] lg:w-[300px] p-2 rounded-md m-2 flex flex-col'>
                   <div className='w-full flex justify-between'>
                     <p className="text-[#04aa6d]">✔</p>
                     <h1 style={{

@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
       >
         <ThemeProvider>
           <NavbarWrapper/>
-          <div className='h-24 w-full'></div>
+          <div className='h-20 w-full'></div>
           {children}
         </ThemeProvider>
       </body>
