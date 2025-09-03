@@ -13,6 +13,40 @@ const Dues = () => {
   const { darkTheme, toggleTheme } = useContext(ThemeContext);
   const [loading, setLoading] = useState(false);
 
+  const  changeAccountCondition = async (cardId) => {
+    try {
+      if(!confirm('Are you realy want to add this account to the sells?')) return;
+
+      const res = await axios.post(`https://mt-counter-server.onrender.com/changeCardCondition`, {
+        cardId
+      })
+      console.log(res.data)
+
+      alert(res.data.message);
+      
+      setAccounts((prev) => prev.filter(acc => acc._id !== cardId));
+    } catch (e) {
+      console.error(e.message)
+    }
+  }
+
+  const  deleteAccount = async (cardId) => {
+    try {
+      if(!confirm('Are you realy want to delete this account?')) return;
+
+      const res = await axios.delete(`https://mt-counter-server.onrender.com/removeCard`, {
+        data: { cardId }
+      })
+      console.log(res.data)
+
+      alert(res.data.message);
+
+      setAccounts((prev) => prev.filter(acc => acc._id !== cardId));
+    } catch (e) {
+      console.error(e.message)
+    }
+  }
+
   const getAllAccounts = async () => {  
       setLoading(true);
       try {
@@ -46,11 +80,11 @@ const Dues = () => {
                   background: darkTheme ? darkThemeColors.background : lightThemeColors.background,
                 }} key={account._id} className='w-[95%] lg:w-[300px] p-2 rounded-md m-2 flex flex-col'>
                   <div className='w-full flex justify-between'>
-                    <p className="text-[#04aa6d]">✔</p>
+                    <p onClick={() => changeAccountCondition(account._id)} className="text-[#04aa6d] cursor-pointer">✔</p>
                     <h1 style={{
                       color: darkTheme ? darkThemeColors.text : lightThemeColors.text
                     }} className='text-center text-[26px] text-bold'>{account.sellerName}</h1>
-                    <p className="text-[#fc4552]">✖</p>
+                    <p onClick={() => deleteAccount(account._id)} className="text-[#fc4552] cursor-pointer">✖</p>
                   </div>
                   <div className='w-full flex justify-between'>
                     <h2 style={{

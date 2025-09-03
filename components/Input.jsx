@@ -1,8 +1,11 @@
+import { darkThemeColors } from '@/utils/Color';
 import { IoPerson, IoAt, IoFingerPrint, IoBagCheck, IoWallet, IoCall, IoLocation } from 'react-icons/io5';
 
-const Input = ({ placeholder, type, onChange }) => {
+const Input = ({ placeholder, type, onChange, darkTheme }) => {
   return (
-    <main className="bg-[#fff] rounded-md p-2 m-4 flex flex-row gap-2">
+    <main style={{
+      background: darkTheme ? '#3a3a3a' : '#fff'
+    }} className="bg-[#fff] rounded-md p-2 m-4 flex flex-row gap-2">
         { type == 'username' && <IoPerson size={20} color='#9d00ff' /> }
         { type == 'email' && <IoAt size={20} color='#9d00ff' /> }
         { type == 'password' && <IoFingerPrint size={20} color='#9d00ff' /> }
