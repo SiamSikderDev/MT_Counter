@@ -7,6 +7,7 @@ import AccountImage from '@/public/assets/account.png';
 import Image from 'next/image';
 import { darkThemeColors, lightThemeColors } from '@/utils/Color'
 import Loading from '@/components/Loading';
+import Button from '@/components/Button';
 
 const Sells = () => {
   const [accounts, setAccounts] = useState([]);
@@ -66,7 +67,6 @@ const Sells = () => {
                     <h1 style={{
                       color: darkTheme ? darkThemeColors.text : lightThemeColors.text
                     }} className='text-center text-[26px] text-bold'>{account.sellerName}</h1>
-                    <p onClick={() => deleteAccount(account._id)} className="text-[#fc4552] cursor-pointer">✖</p>
                   </div>
                   <div className='w-full flex justify-between'>
                     <h2 style={{
@@ -115,6 +115,9 @@ const Sells = () => {
                     <h2 style={{
                       color: darkTheme ? darkThemeColors.text : lightThemeColors.text
                     }} className='text-bold'>{account.total}tk</h2>
+                  </div>
+                  <div className='w-full flex justify-center'>
+                    <Button onClick={() => deleteAccount(account._id)} color="#fc4552" text="Delete" />
                   </div>
                 </div>
               ))

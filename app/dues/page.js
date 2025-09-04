@@ -7,6 +7,7 @@ import AccountImage from '@/public/assets/account.png';
 import Image from 'next/image';
 import { darkThemeColors, lightThemeColors } from '@/utils/Color'
 import Loading from '@/components/Loading';
+import Button from '@/components/Button';
 
 const Dues = () => {
   const [accounts, setAccounts] = useState([]);
@@ -79,12 +80,10 @@ const Dues = () => {
                 <div style={{
                   background: darkTheme ? darkThemeColors.background : lightThemeColors.background,
                 }} key={account._id} className='w-[95%] lg:w-[300px] p-2 rounded-md m-2 flex flex-col'>
-                  <div className='w-full flex justify-between'>
-                    <p onClick={() => changeAccountCondition(account._id)} className="text-[#04aa6d] cursor-pointer">✔</p>
+                  <div className='w-full flex justify-center'>
                     <h1 style={{
                       color: darkTheme ? darkThemeColors.text : lightThemeColors.text
-                    }} className='text-center text-[26px] text-bold'>{account.sellerName}</h1>
-                    <p onClick={() => deleteAccount(account._id)} className="text-[#fc4552] cursor-pointer">✖</p>
+                    }} className='text-center text-[26px] text-bold bg-[#9d00ff] p-2 m-2 rounded-sm'>{account.sellerName}</h1>
                   </div>
                   <div className='w-full flex justify-between'>
                     <h2 style={{
@@ -133,6 +132,10 @@ const Dues = () => {
                     <h2 style={{
                       color: darkTheme ? darkThemeColors.text : lightThemeColors.text
                     }} className='text-bold'>{account.total}tk</h2>
+                  </div>
+                  <div className='w-full flex justify-between'>
+                    <Button onClick={() => changeAccountCondition(account._id)} color="#04aa6d" text="Add to sells" />
+                    <Button onClick={() => deleteAccount(account._id)} color="#fc4552" text="Delete" />
                   </div>
                 </div>
               ))
