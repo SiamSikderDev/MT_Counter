@@ -81,9 +81,7 @@ const Dues = () => {
                   background: darkTheme ? darkThemeColors.background : lightThemeColors.background,
                 }} key={account._id} className='w-[95%] lg:w-[300px] p-2 rounded-md m-2 flex flex-col'>
                   <div className='w-full flex justify-center'>
-                    <h1 style={{
-                      color: darkTheme ? darkThemeColors.text : lightThemeColors.text
-                    }} className='text-center text-[26px] text-bold bg-[#9d00ff] p-2 m-2 rounded-sm'>{account.sellerName}</h1>
+                    <h1 className='text-center text-[26px] text-bold bg-[#9d00ff] p-2 m-2 rounded-sm'>{account.sellerName}</h1>
                   </div>
                   <div className='w-full flex justify-between'>
                     <h2 style={{
