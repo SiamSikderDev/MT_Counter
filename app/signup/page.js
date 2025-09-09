@@ -7,11 +7,14 @@ import Button from "@/components/Button"
 import { useRouter } from "next/navigation"
 import axios from 'axios'
 import { useState } from "react"
+import OtpInput from 'react-otp-input';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [verify, setVerify] = useState(false);
+  const [otp, setOtp] = useState('');
 
   const router = useRouter();
 
@@ -34,9 +37,10 @@ const Signup = () => {
 
       if (!res.data.success) return;
 
-      router.push('/')
+      // router.push('/')
 
       localStorage.setItem('userData', JSON.stringify(res.data.userData));
+      setVerify(true)
     } catch (e) {
       console.error(e.message)
     } finally {
@@ -45,6 +49,42 @@ const Signup = () => {
       setPassword('');
     }
   }
+
+  const verifyOtp = async () => {
+    console.log({
+      email,
+      otp
+    })
+    try {
+      const res = await axios.post(`https://mt-counter-server.onrender.com/verifyOtp`, {
+        email, 
+        otp
+      })
+
+      console.log(res)
+
+      alert(res.data.message);
+
+      if (!res.data.success) return;
+
+      router.push('/')
+    } catch (e) {
+      console.error(e.message)
+    }
+  }
+
+  if (verify) return (
+    <main className='flex lg:flex-row justify-center items-center flex-wrap w-full h-screen'>
+      <OtpInput
+        value={otp}
+        onChange={setOtp}
+        numInputs={6}
+        renderSeparator={<p> </p>}
+        renderInput={(props) => <input {...props} />}
+      />
+      <Button onClick={verifyOtp} text='Verify' />
+    </main>
+  )
 
   return (
     <main className='flex lg:flex-row justify-center items-center flex-wrap w-full h-screen'>
