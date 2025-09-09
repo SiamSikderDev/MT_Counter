@@ -12,7 +12,7 @@ const Home = () => {
     if (!userData) {
       router.push('/login');
     } else {
-      router.push('/home')
+      router.push('/')
     }
   }, [router])
 

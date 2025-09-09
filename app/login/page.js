@@ -30,7 +30,7 @@ const Login = () => {
 
       if (!res.data.success) return;
 
-      router.push('/home')
+      router.push('/')
 
       localStorage.setItem('userData', JSON.stringify(res.data.userData));
     } catch (e) {

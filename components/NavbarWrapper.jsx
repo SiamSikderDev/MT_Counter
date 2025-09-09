@@ -19,7 +19,7 @@ export default function Navbar() {
   }, [darkTheme])
 
   const navItems = [
-    { icon: <IoStorefront size={24} color={pathname.includes('home') ? '#8C00FF' : '#5D3A9B'} />, label: "Home" },
+    { icon: <IoStorefront size={24} color={pathname.includes('/') ? '#8C00FF' : '#5D3A9B'} />, label: "Home" },
     { icon: <IoReader size={24} color={pathname.includes('sells') ? '#8C00FF' : '#5D3A9B'} />, label: "Sells" },
     { icon: <IoHandRight size={24} color={pathname.includes('dues') ? '#8C00FF' : '#5D3A9B'} />, label: "Dues" },
     { icon: <IoAdd size={24} color={pathname.includes('create') ? '#8C00FF' : '#5D3A9B'} />, label: "Create" },
@@ -35,7 +35,7 @@ export default function Navbar() {
           <div
             key={index}
             onClick={(e) => {
-              if (index == 0) router.push('/home');
+              if (index == 0) router.push('/');
               if (index == 1) router.push('/sells'); 
               if (index == 2) router.push('/dues'); 
               if (index == 3) router.push('/create'); 
@@ -45,7 +45,7 @@ export default function Navbar() {
           >
             {item.icon}
             <p style={{
-                color: pathname.includes(item.label.toLowerCase()) ? '#8C00FF' : '#5D3A9B'
+                color: pathname.includes(item.label.toLowerCase()) || index == 0 ? '#8C00FF' : '#5D3A9B'
             }}>{item.label}</p>
           </div>
         ))}
