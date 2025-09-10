@@ -7,18 +7,18 @@ import Button from "@/components/Button"
 import { useRouter } from "next/navigation"
 import axios from 'axios'
 import { useState } from "react"
-import OtpInput from 'react-otp-input';
+import Loading from "@/components/Loading"
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [verify, setVerify] = useState(false);
-  const [otp, setOtp] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
   const signup = async () => {
+    setLoading(true)
     console.log({
       username, 
       email, 
@@ -40,51 +40,16 @@ const Signup = () => {
       // router.push('/')
 
       localStorage.setItem('userData', JSON.stringify(res.data.userData));
-      setVerify(true)
+      router.push('/verify')
     } catch (e) {
       console.error(e.message)
     } finally {
       setUsername('');
       setEmail('');
       setPassword('');
+      setLoading(false)
     }
   }
-
-  const verifyOtp = async () => {
-    console.log({
-      email,
-      otp
-    })
-    try {
-      const res = await axios.post(`https://mt-counter-server.onrender.com/verifyOtp`, {
-        email, 
-        otp
-      })
-
-      console.log(res)
-
-      alert(res.data.message);
-
-      if (!res.data.success) return;
-
-      router.push('/')
-    } catch (e) {
-      console.error(e.message)
-    }
-  }
-
-  if (verify) return (
-    <main className='flex lg:flex-row justify-center items-center flex-wrap w-full h-screen'>
-      <OtpInput
-        value={otp}
-        onChange={setOtp}
-        numInputs={6}
-        renderSeparator={<p> </p>}
-        renderInput={(props) => <input {...props} />}
-      />
-      <Button onClick={verifyOtp} text='Verify' />
-    </main>
-  )
 
   return (
     <main className='flex lg:flex-row justify-center items-center flex-wrap w-full h-screen'>
@@ -100,7 +65,7 @@ const Signup = () => {
         <Input onChange={(e) => setUsername(e.target.value)} type='username' placeholder="Username or Email..." />
         <Input onChange={(e) => setEmail(e.target.value)} type='email' placeholder="Email..." />
         <Input onChange={(e) => setPassword(e.target.value)} type='password' placeholder="Password..." />
-        <Button onClick={signup} text='Signup' />
+        <Button onClick={signup} text={loading ? <Loading/> : 'Signup'} />
         <div className='flex gap-2 ml-8'>
           <p>Already have an account?</p>
           <p onClick={() => router.push('/login')} className='text-[#9d00ff] text-bold cursor-pointer'>Login</p>

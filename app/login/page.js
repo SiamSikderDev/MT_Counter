@@ -7,13 +7,16 @@ import Button from "@/components/Button"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import axios from 'axios'
+import Loading from "@/components/Loading"
 
 const Login = () => {
   const router = useRouter();
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const login = async () => {
+    setLoading(true)
     console.log({
       usernameOrEmail, 
       password
@@ -38,6 +41,7 @@ const Login = () => {
     } finally {
       setUsernameOrEmail('');
       setPassword('');
+      setLoading(false)
     }
   }
 
@@ -54,7 +58,7 @@ const Login = () => {
       <div className='bg-[#f0f0f0] lg:w-[40%] w-[90%] h-[50%] m-4 rounded-lg p-2 flex flex-col'>
         <Input onChange={(e) => setUsernameOrEmail(e.target.value)} type='username' placeholder="Username or Email..." />
         <Input onChange={(e) => setPassword(e.target.value)} type='password' placeholder="Password..." />
-        <Button onClick={login} text='Login' />
+        <Button onClick={login} text={loading ? <Loading/> : 'Login'} />
         <div className='flex gap-2 ml-8'>
           <p>Don&apos;t have an account?</p>
           <p onClick={() => router.push('/signup')} className='text-[#9d00ff] text-bold cursor-pointer'>Signup</p>

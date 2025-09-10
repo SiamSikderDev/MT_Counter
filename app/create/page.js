@@ -7,6 +7,7 @@ import Image from "next/image";
 import CreateImage from '@/public/assets/create.png';
 import axios from 'axios';
 import { ThemeContext } from '@/components/ThemeContext'
+import Loading from "@/components/Loading"
 
 const Create = () => {
     const {darkTheme} = useContext(ThemeContext)
@@ -15,8 +16,10 @@ const Create = () => {
     const [buyerAddress, setBuyerAddress] = useState('');
     const [productPrice, setProductPrice] = useState('');
     const [deliveryCharge, setDeliveryCharge] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const createAccount = async () => {
+        setLoading(true)
         const userData = JSON.parse(localStorage.getItem('userData'));
 
         console.log({
@@ -48,6 +51,7 @@ const Create = () => {
             setBuyerAddress('')
             setProductPrice('')
             setDeliveryCharge('')
+            setLoading(false)
         }
     }
 
@@ -63,7 +67,7 @@ const Create = () => {
             <Input onChange={e => setBuyerName(e.target.value)} type="username" placeholder="Buyer name..." darkTheme={darkTheme} />
             <Input onChange={e => setBuyerNumber(e.target.value)} type="number" placeholder="Buyer number..." darkTheme={darkTheme} />
             <Input onChange={e => setBuyerAddress(e.target.value)} type="address" placeholder="Buyer address..." darkTheme={darkTheme} />
-            <Button onClick={createAccount} text="Create" />
+            <Button onClick={createAccount} text={loading ? <Loading/> : "Create"} />
         </div>
     </main>
   )

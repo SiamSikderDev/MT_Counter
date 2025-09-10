@@ -25,7 +25,7 @@ export default function Navbar() {
     { icon: <IoAdd size={24} color={pathname.includes('create') ? '#8C00FF' : '#5D3A9B'} />, label: "Create" },
   ];
 
-  if (pathname.includes('login') || pathname.includes('signup')) return;
+  if (pathname.includes('login') || pathname.includes('signup') || pathname.includes('verify')) return;
 
   return (
     <main className="w-full h-22 fixed top-0 flex justify-center items-center gap-2">
