@@ -1,6 +1,5 @@
 "use client";
-import { darkThemeColors } from '@/utils/Color';
-import { ThemeContext } from './ThemeContext'
+import { ThemeContext } from "./ThemeContext";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { IoStorefront, IoReader, IoHandRight, IoMoon, IoSunny, IoAdd } from "react-icons/io5";
@@ -11,48 +10,49 @@ export default function Navbar() {
   const { darkTheme, toggleTheme } = useContext(ThemeContext);
 
   useEffect(() => {
-    if (darkTheme){
-      document.body.style.background = '#161622';
+    if (darkTheme) {
+      document.body.style.background = "#161622";
     } else {
-      document.body.style.background = '#f0f0f0';
+      document.body.style.background = "#f0f0f0";
     }
-  }, [darkTheme])
+  }, [darkTheme]);
 
+  // navItems এ শুধু component reference রাখছি
   const navItems = [
-    { icon: <IoStorefront size={24} color={pathname.includes('/') ? '#8C00FF' : '#5D3A9B'} />, label: "Home" },
-    { icon: <IoReader size={24} color={pathname.includes('sells') ? '#8C00FF' : '#5D3A9B'} />, label: "Sells" },
-    { icon: <IoHandRight size={24} color={pathname.includes('dues') ? '#8C00FF' : '#5D3A9B'} />, label: "Dues" },
-    { icon: <IoAdd size={24} color={pathname.includes('create') ? '#8C00FF' : '#5D3A9B'} />, label: "Create" },
+    { path: "/", icon: IoStorefront, label: "Home" },
+    { path: "/sells", icon: IoReader, label: "Sells" },
+    { path: "/dues", icon: IoHandRight, label: "Dues" },
+    { path: "/create", icon: IoAdd, label: "Create" },
   ];
 
-  if (pathname.includes('login') || pathname.includes('signup') || pathname.includes('verify')) return;
+  if (pathname.includes("login") || pathname.includes("signup") || pathname.includes("verify"))
+    return null;
 
   return (
     <main className="w-full h-22 fixed top-0 flex justify-center items-center gap-2">
       <nav className="rounded-full p-2 flex justify-between items-center relative backdrop-blur-sm">
         {/* Nav Items */}
-        {navItems.map((item, index) => (
-          <div
-            key={index}
-            onClick={(e) => {
-              if (index == 0) router.push('/');
-              if (index == 1) router.push('/sells'); 
-              if (index == 2) router.push('/dues'); 
-              if (index == 3) router.push('/create'); 
+        {navItems.map((item, index) => {
+          const isActive = pathname === item.path; // exact match check
+          const Icon = item.icon;
 
-            }}
-            className="flex flex-col justify-center items-center z-10 cursor-pointer px-4"
-          >
-            {item.icon}
-            <p style={{
-                color: pathname.includes(item.label.toLowerCase()) || index == 0 ? '#8C00FF' : '#5D3A9B'
-            }}>{item.label}</p>
-          </div>
-        ))}
+          return (
+            <div
+              key={index}
+              onClick={() => router.push(item.path)}
+              className="flex flex-col justify-center items-center z-10 cursor-pointer px-4"
+            >
+              <Icon size={24} color={isActive ? "#8C00FF" : "#5D3A9B"} />
+              <p style={{ color: isActive ? "#8C00FF" : "#5D3A9B" }}>{item.label}</p>
+            </div>
+          );
+        })}
       </nav>
-        { darkTheme ? 
-        <IoSunny onClick={toggleTheme} className='cursor-pointer' size={30} color="#8C00FF" /> 
-        : <IoMoon onClick={toggleTheme} className='cursor-pointer' size={30} color="#8C00FF" /> }
+      {darkTheme ? (
+        <IoSunny onClick={toggleTheme} className="cursor-pointer" size={30} color="#8C00FF" />
+      ) : (
+        <IoMoon onClick={toggleTheme} className="cursor-pointer" size={30} color="#8C00FF" />
+      )}
     </main>
   );
 }
