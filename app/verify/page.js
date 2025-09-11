@@ -45,7 +45,7 @@ const Verify = () => {
 
   return (
     <main className='flex flex-col justify-center items-center flex-wrap w-full h-screen'>
-      <OtpInput
+      {/* <OtpInput
         value={otp}
         onChange={setOtp}
         numInputs={6}
@@ -55,6 +55,17 @@ const Verify = () => {
                 <input {...props} />
             </div>
         )}
+      /> */}
+      <input
+        style={{
+          fontSize: 60,
+          borderBottom: '2px solid #9d00ff',
+          color: '#9d00ff',
+          width: '140px'
+        }}
+        type='password'
+        value={otp}
+        onChange={e => setOtp(e.target.value)}
       />
       <Button onClick={verifyOtp} text={loading ? <Loading/> : 'Verify'} />
     </main>
