@@ -74,7 +74,7 @@ const Dues = () => {
     <main className='flex-1'>
       {
         accounts ? (
-          <div className='w-full h-full flex flex-col-reverse lg:flex-row flex-wrap justify-center'>
+          <div className='w-full h-full flex flex-col lg:flex-row flex-wrap justify-center'>
             {
               accounts?.map((account) => (
                 <div style={{
