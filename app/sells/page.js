@@ -58,6 +58,7 @@ const Sells = () => {
   return (
     <main className='flex-1'>
       <Input
+        darkTheme={darkTheme}
         type='search'
         placeholder='Search with buyer name...'
         onChange={e => setName(e.target.value)}
