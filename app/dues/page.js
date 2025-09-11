@@ -93,6 +93,9 @@ const Dues = () => {
                   <div className='w-full flex justify-center'>
                     <h1 className='text-center text-[26px] text-bold bg-[#9d00ff] p-2 m-2 rounded-sm'>{account.sellerName}</h1>
                   </div>
+                  <div className='w-full flex justify-center'>
+                    <p className='text-center text-bold text-[#9d00ff] p-2 m-2 rounded-sm'>{new Date(account.createdAt).toLocaleString('en-GB')}</p>
+                  </div>
                   <div className='w-full flex justify-between'>
                     <h2 style={{
                       color: darkTheme ? darkThemeColors.text : lightThemeColors.text
