@@ -2,12 +2,22 @@
 import { ThemeContext } from "./ThemeContext";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
-import { IoStorefront, IoReader, IoHandRight, IoMoon, IoSunny, IoAdd } from "react-icons/io5";
+import { IoStorefront, IoReader, IoHandRight, IoMoon, IoSunny, IoAdd, IoLogOut } from "react-icons/io5";
 
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { darkTheme, toggleTheme } = useContext(ThemeContext);
+
+  const logout = () => {
+    if (!confirm('Are you sure you want to logout?')) return;
+    try {
+      localStorage.removeItem('userData')
+      router.push('/login')
+    } catch (e) {
+      console.error(e.message)
+    }
+  }
 
   useEffect(() => {
     if (darkTheme) {
@@ -29,6 +39,7 @@ export default function Navbar() {
     return null;
 
   return (
+    <main className='w-full h-screen fixed'>
     <main className="w-full h-22 fixed top-0 flex justify-center items-center gap-2">
       <nav className="rounded-full p-2 flex justify-between items-center relative backdrop-blur-sm">
         {/* Nav Items */}
@@ -53,6 +64,10 @@ export default function Navbar() {
       ) : (
         <IoMoon onClick={toggleTheme} className="cursor-pointer" size={30} color="#8C00FF" />
       )}
+    </main>
+    <div className='backdrop-blur-sm rounded-lg p-4 fixed right-0 bottom-0'>
+      <IoLogOut onClick={logout} className="cursor-pointer" size={30} color="#8C00FF" />
+    </div>
     </main>
   );
 }
