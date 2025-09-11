@@ -39,8 +39,8 @@ export default function Navbar() {
     return null;
 
   return (
-    <main className='w-full h-screen fixed'>
     <main className="w-full h-22 fixed top-0 flex justify-center items-center gap-2">
+      <IoLogOut onClick={logout} className="cursor-pointer" size={30} color="#8C00FF" />
       <nav className="rounded-full p-2 flex justify-between items-center relative backdrop-blur-sm">
         {/* Nav Items */}
         {navItems.map((item, index) => {
@@ -64,10 +64,6 @@ export default function Navbar() {
       ) : (
         <IoMoon onClick={toggleTheme} className="cursor-pointer" size={30} color="#8C00FF" />
       )}
-    </main>
-    <div className='backdrop-blur-sm rounded-lg p-4 fixed right-0 bottom-0'>
-      <IoLogOut onClick={logout} className="cursor-pointer" size={30} color="#8C00FF" />
-    </div>
     </main>
   );
 }

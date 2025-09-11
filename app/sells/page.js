@@ -8,11 +8,13 @@ import Image from 'next/image';
 import { darkThemeColors, lightThemeColors } from '@/utils/Color'
 import Loading from '@/components/Loading';
 import Button from '@/components/Button';
+import Input from '@/components/Input';
 
 const Sells = () => {
   const [accounts, setAccounts] = useState([]);
   const { darkTheme, toggleTheme } = useContext(ThemeContext);
   const [loading, setLoading] = useState(false);
+  const [name, setName] = useState('');
 
   const  deleteAccount = async (cardId) => {
     try {
@@ -55,6 +57,11 @@ const Sells = () => {
 
   return (
     <main className='flex-1'>
+      <Input
+        type='search'
+        placeholder='Search with buyer name...'
+        onChange={e => setName(e.target.value)}
+      />
       {
         accounts ? (
           <div className='w-full h-full flex flex-col lg:flex-row flex-wrap justify-center'>

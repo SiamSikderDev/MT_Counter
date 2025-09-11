@@ -1,6 +1,6 @@
 "use client"
 import { useState } from 'react';
-import { IoPerson, IoAt, IoFingerPrint, IoBagCheck, IoWallet, IoCall, IoLocation, IoEye, IoEyeOff } from 'react-icons/io5';
+import { IoPerson, IoAt, IoFingerPrint, IoBagCheck, IoWallet, IoCall, IoLocation, IoEye, IoEyeOff, IoSearch } from 'react-icons/io5';
 
 const Input = ({ placeholder, type, onChange, darkTheme }) => {
   const [secure, setSecure] = useState(true);
@@ -17,6 +17,7 @@ const Input = ({ placeholder, type, onChange, darkTheme }) => {
         { type == 'price' && <IoWallet size={20} color='#9d00ff' /> }
         { type == 'number' && <IoCall size={20} color='#9d00ff' /> }
         { type == 'address' && <IoLocation size={20} color='#9d00ff' /> }
+        { type == 'search' && <IoSearch size={20} color='#9d00ff' /> }
 
         <input
             type={type == 'password' && secure ? 'password' : 'text'}
