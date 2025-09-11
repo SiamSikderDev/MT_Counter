@@ -45,17 +45,6 @@ const Verify = () => {
 
   return (
     <main className='flex flex-col justify-center items-center flex-wrap w-full h-screen'>
-      {/* <OtpInput
-        value={otp}
-        onChange={setOtp}
-        numInputs={6}
-        renderSeparator={<p> </p>}
-        renderInput={(props) => (
-            <div className='border-2 border-[#9d00ff] rounded-lg m-2 p-4'>
-                <input {...props} />
-            </div>
-        )}
-      /> */}
       <input
         style={{
           fontSize: 60,
