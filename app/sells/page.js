@@ -66,7 +66,10 @@ const Sells = () => {
         accounts ? (
           <div className='w-full h-full flex flex-col lg:flex-row flex-wrap justify-center'>
             {
-              accounts?.map((account) => (
+              accounts?.map((account) => {
+                if (!account.buyerName.toLowerCase().includes(name.toLowerCase())) return;
+
+                return (
                 <div style={{
                   background: darkTheme ? darkThemeColors.background : lightThemeColors.background,
                 }} key={account._id} className='w-[95%] lg:w-[300px] p-2 rounded-md m-2 flex flex-col'>
@@ -125,7 +128,8 @@ const Sells = () => {
                     <Button onClick={() => deleteAccount(account._id)} color="#fc4552" text="Delete" />
                   </div>
                 </div>
-              ))
+                )
+              })
             }
           </div>
         ) : (

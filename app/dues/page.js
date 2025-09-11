@@ -8,11 +8,13 @@ import Image from 'next/image';
 import { darkThemeColors, lightThemeColors } from '@/utils/Color'
 import Loading from '@/components/Loading';
 import Button from '@/components/Button';
+import Input from '@/components/Input';
 
 const Dues = () => {
   const [accounts, setAccounts] = useState([]);
   const { darkTheme, toggleTheme } = useContext(ThemeContext);
   const [loading, setLoading] = useState(false);
+  const [name, setName] = useState('');
 
   const  changeAccountCondition = async (cardId) => {
     try {
@@ -72,11 +74,19 @@ const Dues = () => {
 
   return (
     <main className='flex-1'>
+      <Input
+        type='search'
+        placeholder='Search with buyer name...'
+        onChange={e => setName(e.target.value)}
+      />
       {
         accounts ? (
           <div className='w-full h-full flex flex-col lg:flex-row flex-wrap justify-center'>
             {
-              accounts?.map((account) => (
+              accounts?.map((account) => {
+                if (!account.buyerName.toLowerCase().includes(name.toLowerCase())) return;
+
+                return (
                 <div style={{
                   background: darkTheme ? darkThemeColors.background : lightThemeColors.background,
                 }} key={account._id} className='w-[95%] lg:w-[300px] p-2 rounded-md m-2 flex flex-col'>
@@ -136,7 +146,8 @@ const Dues = () => {
                     <Button onClick={() => deleteAccount(account._id)} color="#fc4552" text="Delete" />
                   </div>
                 </div>
-              ))
+                )
+              })
             }
           </div>
         ) : (
