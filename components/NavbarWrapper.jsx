@@ -21,7 +21,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (darkTheme) {
-      document.body.style.background = "#161622";
+      document.body.style.background = "#0e0e12";
     } else {
       document.body.style.background = "#f0f0f0";
     }

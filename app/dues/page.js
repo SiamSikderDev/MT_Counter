@@ -92,7 +92,10 @@ const Dues = () => {
                   background: darkTheme ? darkThemeColors.background : lightThemeColors.background,
                 }} key={account._id} className='w-[95%] lg:w-[300px] p-2 rounded-md m-2 flex flex-col'>
                   <div className='w-full flex justify-center'>
-                    <h1 className='text-center text-[26px] text-bold bg-[#9d00ff] p-2 m-2 rounded-sm'>{account.sellerName}</h1>
+                    <h1 style={{
+                      color: darkTheme ? '#fff' : '#000',
+                      background: darkTheme ? '#2b2c34' : '#f0f0f0'
+                    }} className='text-center text-[26px] text-bold p-2 m-2 rounded-sm'>{account.sellerName}</h1>
                   </div>
                   <div className='w-full flex justify-center'>
                     <p className='text-center text-bold text-[#9d00ff] p-2 m-2 rounded-sm'>{new Date(account.createdAt).toLocaleString('en-GB')}</p>

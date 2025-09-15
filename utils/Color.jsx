@@ -1,7 +1,7 @@
 export const darkThemeColors = {
   primary: "#8B5CF6",    // Modern purple (#8B5CF6)
   secondary: "#06D6A0",  // Vibrant teal (#06D6A0)
-  background: "#0F172A", // Deep navy blue (#0F172A)
+  background: "#1b1b21", // Deep navy blue (#0F172A)
   text: "#F1F5F9",        // Soft white (#F1F5F9)
   border: "#7E22CE",     
 };
