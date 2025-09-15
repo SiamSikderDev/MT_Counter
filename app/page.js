@@ -59,34 +59,22 @@ const Home = () => {
 
   return (
     <main className="p-2">
-      <h1 className="text-center text-2xl">Welcome to Malabis Twine Counter {user?.username}!</h1>
+      <h1 style={{
+        color: darkTheme ? '#fff' : '#000',
+      }} className="text-center text-2xl">Welcome to Malabis Twine Counter {user?.username}!</h1>
       <div className="w-full flex flex-row justify-center">
         <h1 className="p-2 rounded-lg m-2" style={{
+          color: darkTheme ? '#fff' : '#000',
           background: darkTheme ? darkThemeColors.background : lightThemeColors.background
         }}>Total accounts: {sells?.length + dues?.length}</h1>
         <h1 className="p-2 rounded-lg m-2" style={{
+          color: darkTheme ? '#fff' : '#000',
           background: darkTheme ? darkThemeColors.background : lightThemeColors.background
         }}>Total sells: {sells?.length}</h1>
         <h1 className="p-2 rounded-lg m-2" style={{
+          color: darkTheme ? '#fff' : '#000',
           background: darkTheme ? darkThemeColors.background : lightThemeColors.background
         }}>Total dues: {dues?.length}</h1>
-      </div>
-      <div>
-        {
-          sells.concat(dues).map((account, index) => {
-            return (
-              <table key={index}>
-                <tr>
-                  <th>Seller</th>
-                  <th>Buyer</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                </tr>
-              </table>
-            )
-          })
-        }
       </div>
     </main>
   )
